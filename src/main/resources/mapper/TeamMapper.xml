@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yupi.usercenter.mapper.TeamMapper">
+
+    <resultMap id="BaseResultMap" type="com.yupi.usercenter.model.domain.Team">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="description" column="description" jdbcType="VARCHAR"/>
+            <result property="maxNum" column="maxNum" jdbcType="INTEGER"/>
+            <result property="expireTime" column="expireTime" jdbcType="TIMESTAMP"/>
+            <result property="userId" column="userId" jdbcType="BIGINT"/>
+            <result property="status" column="status" jdbcType="INTEGER"/>
+            <result property="password" column="password" jdbcType="VARCHAR"/>
+            <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="updateTime" jdbcType="TIMESTAMP"/>
+            <result property="isDelete" column="isDelete" jdbcType="TINYINT"/>
+    </resultMap>
+    
+    <select id="selectTeamUserList" resultType="com.yupi.usercenter.model.vo.UserVO">
+        select
+            u.id as 'id',
+            u.username as 'username',
+            u.userAccount as 'userAccount',
+            u.avatarUrl as 'avatarUrl',
+            u.gender as 'gender',
+            u.phone as 'phone',
+            u.email as 'email',
+            u.userStatus as 'userStatus',
+            u.createTime as 'createTime',
+            u.updateTime as 'updateTime',
+            u.userRole as 'userRole',
+            u.planetCode as 'planetCode',
+            u.tags as 'tags',
+            u.userProfile as 'userProfile'
+        from team t
+            join user_team ut on t.id = ut.teamId and ut.isDelete = 0
+            join user u on ut.userId = u.id and u.isDelete = 0
+        where t.isDelete = 0 and t.id = #{teamId};
+    </select>
+
+    <sql id="Base_Column_List">
+        id,name,description,
+        maxNum,expireTime,userId,
+        status,password,createTime,
+        updateTime,isDelete
+    </sql>
+</mapper>
