@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.yupi</groupId>
-    <artifactId>user-play</artifactId>
+    <artifactId>user-play-backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>usercenter</name>
     <description>usercenter</description>
